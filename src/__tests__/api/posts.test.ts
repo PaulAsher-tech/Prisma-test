@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import { prisma } from '@/lib/db'
 import { sendEmail, generateNewsletterEmail } from '@/lib/email'
 import { GET, POST } from '@/app/api/posts/route'

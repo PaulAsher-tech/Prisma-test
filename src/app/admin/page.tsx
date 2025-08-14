@@ -51,8 +51,8 @@ export default function AdminPage() {
         const data = await response.json()
         setPosts(data)
       }
-    } catch (error) {
-      console.error('Error fetching posts:', error)
+    } catch (_error) {
+      console.error('Error fetching posts:', _error)
     } finally {
       setLoading(false)
     }
@@ -85,8 +85,8 @@ export default function AdminPage() {
         console.error('Error response:', error)
         alert(error.error || 'Failed to save post')
       }
-    } catch (error) {
-      console.error('Error submitting form:', error)
+    } catch (_error) {
+      console.error('Error submitting form:', _error)
       alert('Failed to save post')
     }
   }
@@ -116,7 +116,7 @@ export default function AdminPage() {
       } else {
         alert('Failed to delete post')
       }
-    } catch (error) {
+    } catch (_error) {
       alert('Failed to delete post')
     }
   }

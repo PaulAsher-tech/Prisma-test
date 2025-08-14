@@ -63,7 +63,7 @@ export default function Home() {
         const error = await response.json()
         setSubscribeMessage(error.error || 'Failed to subscribe')
       }
-    } catch (error) {
+    } catch (_error) {
       setSubscribeMessage('Failed to subscribe')
     } finally {
       setSubscribing(false)
