@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "12000:12000"
+    environment:
+      DATABASE_URL: "postgresql://user:password@db:5432/newsletter"
+      NODE_ENV: "production"
+      PORT: "12000"
+      HOSTNAME: "0.0.0.0"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:12000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - newsletter-network
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: newsletter
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d newsletter"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - newsletter-network
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  newsletter-network:
+    driver: bridge
