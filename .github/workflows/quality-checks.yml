@@ -49,7 +49,6 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
-      run: npx tsc --noEmit
 
     - name: Run unit tests
       run: npm test
