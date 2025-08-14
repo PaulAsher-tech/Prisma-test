@@ -30,7 +30,14 @@ export default function AdminPage() {
     reset,
     formState: { errors, isSubmitting }
   } = useForm<PostFormData>({
-    resolver: zodResolver(postSchema)
+    resolver: zodResolver(postSchema),
+    defaultValues: {
+      title: '',
+      content: '',
+      excerpt: '',
+      published: false,
+      scheduledAt: ''
+    }
   })
 
   useEffect(() => {
@@ -143,10 +150,7 @@ export default function AdminPage() {
           <h2 className="text-2xl font-semibold mb-4 text-gray-700">
             {editingPost ? 'Edit Post' : 'Create New Post'}
           </h2>
-          <form onSubmit={(e) => {
-            console.log('Form submit event triggered')
-            handleSubmit(onSubmit)(e)
-          }} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Title

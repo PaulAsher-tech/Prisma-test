@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatDate } from '@/lib/utils'
 
@@ -56,12 +57,12 @@ export default async function PostPage({ params }: PostPageProps) {
       </article>
 
       <div className="mt-8 text-center">
-        <a
+        <Link
           href="/"
           className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
         >
           ← Back to Home
-        </a>
+        </Link>
       </div>
     </div>
   )
