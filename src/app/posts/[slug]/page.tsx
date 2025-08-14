@@ -4,9 +4,9 @@ import { prisma } from '@/lib/db'
 import { formatDate } from '@/lib/utils'
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 async function getPost(slug: string) {
