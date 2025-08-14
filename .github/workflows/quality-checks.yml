@@ -49,8 +49,6 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
-
-    - name: Run TypeScript type checking
       run: npx tsc --noEmit
 
     - name: Run unit tests

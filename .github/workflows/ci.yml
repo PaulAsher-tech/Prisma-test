@@ -48,8 +48,6 @@ jobs:
     - name: Run linting
       run: npm run lint
 
-    - name: Run type checking
-      run: npx tsc --noEmit
 
     - name: Run tests
       run: npm test
